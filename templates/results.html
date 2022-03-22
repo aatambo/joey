@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="mt-3">
+		<p class="card text-success" style="padding:10px;">File Name: {{csv.csv}}</p>
+		<div class="d-flex align-items-start">
+			<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+				<button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Summary</button>
+				<button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Results</button>
+				<button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">File contents</button>
+			</div>
+			<div class="tab-content" id="v-pills-tabContent">
+				<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+					<div class="card h-100">
+						<div class="card-body">
+							<p>TOTAL ITEMS ==> <b>{{ all_items }}</b></p>
+							<p>GIVEN MIN-SUPPORT ==> <b>{{ csv.min_support }}</b></p>
+							<p>APRIORI ALGORITHM RUN-TIME ==> <b>{{  program_run_time }} hrs:mins:sec.ms</b></p>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+					<div class="">
+						<div class="card-body">
+							<table class="table table-lg table-borderless">
+								<thead>
+									<tr>
+										<th scope="col">Item</th>
+										<th scope="col">Count</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for item in items %}
+										<tr>
+											<td>{{ item.0 }}</td>
+											<td>{{ item.1 }}</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+					<div class="card h-100">
+						<div class="card-body">
+							{{content}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}
